@@ -1,4 +1,4 @@
-name: Deploy ARM Template
+name: Deploy ARM Template and Bicep file
 
 on:
   push:
@@ -12,6 +12,8 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      ResourceGroupName: "armdeploy-rg"
     environment:
       name: development
     steps:
@@ -25,9 +27,19 @@ jobs:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-        
+
+      # ARMテンプレートをデプロイする
       - name: "Deploy ARM Template"
         uses: azure/arm-deploy@v1
         with:
-          resourceGroupName: armdeploy-rg
+          resourceGroupName: ${{ env.ResourceGroupName }}
+          template: ./armdeploy.json
+          parameters: ./armdeploy.parameter.json
+
+      # Bicepファイルをデプロイする
+      - name: "Deploy Bicep File"
+        uses: azure/arm-deploy@v1
+        with:
+          resourceGroupName: ${{ env.ResourceGroupName }}
           template: ./bicepdeploy.bicep
+          parameters: ./bicepdeploy.bicepparam

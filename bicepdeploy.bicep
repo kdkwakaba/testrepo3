@@ -1,17 +1,17 @@
 @description('Vnet name')
-param vnetName string = 'bicepdeploy-vnet'
+param vnetName string
 
 @description('Address prefix')
-param vnetAddressPrefix string = '172.16.0.0/16'
+param vnetAddressPrefix string
 
 @description('Subnet Prefix')
-param subnetPrefix string = '172.16.0.0/24'
+param subnetPrefix string
 
 @description('Subnet Name')
-param subnetName string = 'bicepdeploy-snet'
+param subnetName string
 
 @description('Location for all resources.')
-param location string = resourceGroup().location
+param location string
 
 resource vnet 'Microsoft.Network/virtualNetworks@2021-08-01' = {
   name: vnetName
