@@ -43,3 +43,4 @@ jobs:
           resourceGroupName: ${{ env.ResourceGroupName }}
           template: ./bicepdeploy.bicep
           parameters: ./bicepdeploy.bicepparam
+          failOnStdErr: false
