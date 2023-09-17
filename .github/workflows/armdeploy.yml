@@ -23,7 +23,7 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: "Run Script"
-        run: pwd
+        run: pwd ; ls -l ../ ; ls -l ../../ ; ls -l
         shell: bash
         
       - name: "Deploy ARM Template"
